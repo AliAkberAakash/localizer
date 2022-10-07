@@ -19,11 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: CrossScroll(
         child:Column(
           children: [
-            for(int i=0; i<50; i++)
+            for(int i=0; i<15; i++)
               Row(
                 children: [
-                  for(int i=0; i<50; i++)
-                    const TextBoxWidget(),
+                  for(int j=0; j<15; j++)
+                    TextBoxWidget(
+                      i: i,
+                      j: j,
+                    ),
                 ],
               )
           ],
