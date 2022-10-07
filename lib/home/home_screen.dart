@@ -1,4 +1,6 @@
+import 'package:cross_scroll/cross_scroll.dart';
 import 'package:flutter/material.dart';
+import 'package:localizer/home/widget/text_box_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,8 +16,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Home"),
       ),
-      body: const Center(
-        child: Text("Welcome"),
+      body: CrossScroll(
+        child:Column(
+          children: [
+            for(int i=0; i<50; i++)
+              Row(
+                children: [
+                  for(int i=0; i<50; i++)
+                    const TextBoxWidget(),
+                ],
+              )
+          ],
+        )
       ),
     );
   }
