@@ -3,15 +3,9 @@ import 'package:flutter/material.dart';
 class TextBoxWidget extends StatelessWidget {
 
   final int i,j;
-  String value = "text";
-  TextBoxWidget({Key? key, required this.i, required this.j}) : super(key: key){
-    if(i==0 && j==0){
-      value = "";
-    }else if(i==0 && j>0){
-      value = "Country name";
-    }else if(j==0 && i>0){
-      value = "Key";
-    }
+  String value;
+  TextBoxWidget({Key? key, required this.i, required this.j, this.value = ""}) : super(key: key){
+    controller.text=value;
   }
 
   TextEditingController controller = TextEditingController();
@@ -21,7 +15,7 @@ class TextBoxWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.pinkAccent,
+          color: (i==0) ? Colors.black : (j==0) ? Colors.black : Colors.pinkAccent,
         ),
       ),
       height: 50,

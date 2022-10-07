@@ -2,6 +2,34 @@ import 'package:cross_scroll/cross_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:localizer/home/widget/text_box_widget.dart';
 
+const keys = [
+  "name",
+  "age",
+  "address",
+];
+
+const languages = [
+  "english",
+  "spanish",
+];
+
+const english = {
+  "name":"Name",
+  "age":"Age",
+  "address":"Address",
+};
+
+const spanish = {
+  "name":"Nombre",
+  "age":"Años",
+  "address":"Dirección",
+};
+
+const languageMap = {
+  "english" : english,
+  "spanish" : spanish,
+};
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -10,6 +38,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int i=0,j=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,20 +47,36 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: CrossScroll(
         child:Column(
-          children: [
-            for(int i=0; i<15; i++)
-              Row(
-                children: [
-                  for(int j=0; j<15; j++)
-                    TextBoxWidget(
-                      i: i,
-                      j: j,
-                    ),
-                ],
-              )
-          ],
+          children: _generateCols(),
         )
       ),
     );
   }
+
+  List<Widget> _generateCols(){
+    List<Widget> children = [];
+    for(int k=0; k<keys.length+1; k++) {
+      children.add(_getRowItem(k==0 ? "" : keys[k-1]));
+      i++;
+    }
+    return children;
+  }
+
+  Widget _getRowItem(String key){
+    List<Widget> children = [];
+    for(int k=0; k<languages.length+1; k++) {
+      children.add(
+        TextBoxWidget(
+          i: i,
+          j: j,
+          value:(k==0) ? key : (key != "") ? languageMap[languages[k-1]]![key]! : languages[k-1],
+        ),
+      );
+      j++;
+    }
+    return Row(
+      children: children,
+    );
+  }
+
 }
