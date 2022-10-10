@@ -21,7 +21,7 @@ const english = {
 
 const spanish = {
   "name":"Nombre",
-  "age":"Años",
+  //"age":"Años",
   "address":"Dirección",
 };
 
@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home"),
+        backgroundColor: Colors.pinkAccent,
+        title: const Text("Locaizer"),
       ),
       body: CrossScroll(
         child:Column(
@@ -63,13 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _getRowItem(String key){
+    j = 0;
     List<Widget> children = [];
     for(int k=0; k<languages.length+1; k++) {
       children.add(
         TextBoxWidget(
           i: i,
           j: j,
-          value:(k==0) ? key : (key != "") ? languageMap[languages[k-1]]![key]! : languages[k-1],
+          value:(k==0) ? key : (key != "") ? languageMap[languages[k-1]]![key] : languages[k-1],
         ),
       );
       j++;
