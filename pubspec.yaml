@@ -32,6 +32,8 @@ dependencies:
 
   cross_scroll: 0.0.75
   firebase_core: 1.24.0
+  cloud_firestore: 3.5.1
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:
