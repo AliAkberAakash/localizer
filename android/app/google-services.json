@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "394391677732",
+    "project_id": "localizer-a2d1a",
+    "storage_bucket": "localizer-a2d1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394391677732:android:77ab007b2e0f5f1c8421b1",
+        "android_client_info": {
+          "package_name": "com.cyberwort.localizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394391677732-3hvageh48ejtu9h6itdb87qsk7njh4bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8nd00OgYHFH_ZdsvpGo0GnDL8Wj2LD_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394391677732-3hvageh48ejtu9h6itdb87qsk7njh4bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
