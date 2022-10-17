@@ -2,34 +2,7 @@ import 'package:cross_scroll/cross_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:localizer/home/data/service/firebase_service.dart';
 import 'package:localizer/home/widget/text_box_widget.dart';
-
-const keys = [
-  "name",
-  "age",
-  "address",
-];
-
-const languages = [
-  "english",
-  "spanish",
-];
-
-const english = {
-  "name":"Name",
-  "age":"Age",
-  "address":"Address",
-};
-
-const spanish = {
-  "name":"Nombre",
-  //"age":"Años",
-  "address":"Dirección",
-};
-
-const languageMap = {
-  "english" : english,
-  "spanish" : spanish,
-};
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -42,9 +15,32 @@ class _HomeScreenState extends State<HomeScreen> {
   int i=0,j=0;
 
   final FirebaseService _service = FirebaseService();
+  final _logger = Logger();
 
-  _HomeScreenState(){
-    _service.getProjectInfo();
+  List<String> keys = [];
+  List<String> languages = [];
+  Map<String,Map<String?,String?>> languageMap =  {};
+
+  _HomeScreenState();
+
+  void fetchData() async{
+    await _service.getProjectInfo();
+
+    setState(() {
+      keys = FirebaseService.projectDetails!.keys;
+      languages = FirebaseService.projectDetails!.languages;
+      languageMap = FirebaseService.languageMap;
+
+      _logger.d(keys);
+      _logger.d(languages);
+
+    });
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
   }
 
   @override
@@ -54,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.pinkAccent,
         title: const Text("Locaizer"),
       ),
-      body: CrossScroll(
+      body: (keys.isNotEmpty && languages.isNotEmpty) ? CrossScroll(
         child:Column(
           children: _generateCols(),
         )
-      ),
+      ) : const SizedBox(),
     );
   }
 
