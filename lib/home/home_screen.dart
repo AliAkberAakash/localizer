@@ -50,19 +50,52 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.pinkAccent,
         title: const Text("Locaizer"),
       ),
-      body: (keys.isNotEmpty && languages.isNotEmpty) ? CrossScroll(
-        child:Column(
-          children: _generateCols(),
-        )
-      ) : const SizedBox(),
+      body: Column(
+        children: [
+          Flexible(
+            child: Row(
+              children: [
+                Flexible(child: _getCells()),
+                IconButton(
+                  onPressed: (){
+                    setState(() {
+                      FirebaseService.projectDetails!.languages.add("");
+                      languages = FirebaseService.projectDetails!.languages;
+                    });
+                  },
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: (){
+              setState(() {
+                FirebaseService.projectDetails!.keys.add("");
+                keys = FirebaseService.projectDetails!.keys;
+              });
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
     );
   }
 
+  Widget _getCells(){
+    return (keys.isNotEmpty && languages.isNotEmpty) ? CrossScroll(
+        child:Column(
+          children: _generateCols(),
+        )
+    ) : const SizedBox();
+  }
+
   List<Widget> _generateCols(){
+    i=0;
     List<Widget> children = [];
     for(int k=0; k<keys.length+1; k++) {
       children.add(_getRowItem(k==0 ? "" : keys[k-1]));
-      i++;
+      i+=1;
     }
     return children;
   }
@@ -75,7 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
         TextBoxWidget(
           i: i,
           j: j,
-          value:(k==0) ? key : (key != "") ? languageMap[languages[k-1]]![key] : languages[k-1],
+          k: k,
+          value:(k==0) ? key : (key != "") ? (languageMap[languages[k-1]]?[key] ?? "") : (k>0 && i==0 ? languages[k-1] : ""),
         ),
       );
       j++;

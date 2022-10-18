@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class TextBoxWidget extends StatelessWidget {
 
-  final int i,j;
+  final int i,j,k;
   String? value;
-  TextBoxWidget({Key? key, required this.i, required this.j, this.value = ""}) : super(key: key){
+  TextBoxWidget({Key? key, required this.i, required this.j, required this.k, this.value = ""}) : super(key: key){
     controller.text=value ?? "";
   }
 
